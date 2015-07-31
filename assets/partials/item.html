@@ -9,6 +9,7 @@
     Genre: <ul><li ng-repeat="genre in item.metadata.result.genres">{{ genre }}</li></ul><br />
     Rating: {{ item.metadata.result.rating }} ({{ item.metadata.result.votes }})<br />
     Plot: {{ item.metadata.result.plot }}<br />
+    IMdb link: <a href="{{ item.metadata.result.href }}" target="_blank">{{ item.metadata.result.href }}</a><br />
     </div>
 
     <div class="row-fluid">
