@@ -3,19 +3,23 @@
     <h4 class="modal-title" id="playerModalLabel">{{ item.metadata.result.title }}</h4>
 </div>
 <div class="modal-body">
-    <div class="row-fluid">
-    Title: {{ item.metadata.result.title }}<br />
-    Release name: {{ item.name }}<br />
-    Genre: <ul><li ng-repeat="genre in item.metadata.result.genres">{{ genre }}</li></ul><br />
-    Rating: {{ item.metadata.result.rating }} ({{ item.metadata.result.votes }})<br />
-    Plot: {{ item.metadata.result.plot }}<br />
-    IMdb link: <a href="{{ item.metadata.result.href }}" target="_blank">{{ item.metadata.result.href }}</a><br />
-    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Metadata</h5>
+            <strong>Title:</strong> {{ item.metadata.result.title }}<br />
+            <strong>Release name:</strong> {{ item.name }}<br />
+            <strong>Genre:</strong> <ul class="list-unstyled"><li ng-repeat="genre in item.metadata.result.genres">- {{ genre }}</li></ul><br />
+            <strong>Rating:</strong> {{ item.metadata.result.rating }} ({{ item.metadata.result.votes }})<br />
+            <strong>IMdb link:</strong> <a href="http://www.imdb.com/title/tt{{ item.metadata.id }}" target="_blank">{{ item.metadata.id }}</a><br />
+            <strong>Plot:</strong> {{ item.metadata.result.plot }}<br />
+        </div>
 
-    <div class="row-fluid">
-        <ul>
-            <li ng-repeat="player in players"><a ng-click="handleItem(player, item)">Play on {{ player.name }}</a></li>
-            <li><a ng-click="handleItem('download', item)">Download</a></li>
-        </ul>
+        <div class="col-md-4">
+            <h5>Streaming method</h5>
+            <ul class="list-unstyled">
+                <li ng-repeat="player in players"><a ng-click="handleItem(player, item)">Play on {{ player.name }}</a></li>
+                <li><a ng-click="handleItem('download', item)">Download</a></li>
+            </ul>
+        </div>
     </div>
 </div>
