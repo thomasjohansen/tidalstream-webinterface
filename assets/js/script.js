@@ -81,7 +81,7 @@
     return $scope.features = tidalstreamService.featureList;
   });
 
-  tidalstreamApp.controller('ListCtrl', function($scope, $rootScope, $location, $q, tidalstreamService) {
+  tidalstreamApp.controller('ListCtrl', function($scope, $rootScope, $location, $q, $modal, tidalstreamService) {
     var addMetadata, args, flattenListing, generateGroupedListing, generateLetterPages;
     $scope.listing = [];
     $scope.pageToJumpTo = null;
@@ -120,8 +120,16 @@
         $location.url($location.path());
         return $location.search('url', item.href);
       } else if (item.rel === 'file') {
-        item.watched = Date.now() / 1000;
-        return tidalstreamService.doItemPlayback(item);
+        var modalInstance;
+        return modalInstance = $modal.open({
+          templateUrl: 'assets/partials/item.html',
+          controller: 'ItemCtrl',
+          resolve: {
+            item: function() {
+              return item;
+            }
+          }
+        });
       }
     };
     $scope.switchPage = function(pageNumber) {
@@ -285,6 +293,22 @@
     if (args.url) {
       return $scope.listFolder(args.url);
     }
+  });
+
+  tidalstreamApp.controller('ItemCtrl', function($scope, $modalInstance, tidalstreamService, item) {
+    $scope.item = item;
+
+    $scope.players = tidalstreamService.players;
+
+    $scope.handleItem = function(player, item) {
+      tidalstreamService.playbackOutput.obj = player;
+      tidalstreamService.playbackOutput.type = 'player';
+      tidalstreamService.playbackOutput.status = 'online';
+
+      item.watched = Date.now() / 1000;
+
+      return tidalstreamService.doItemPlayback(item);
+    };
   });
 
   tidalstreamApp.controller('LoginCtrl', function($scope, $location, tidalstreamService) {
