@@ -1,18 +1,18 @@
 <div class="modal-header">
     <button ng-click="$dismiss('X marks the spot!')" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="playerModalLabel">{{ item.metadata.result.title }}</h4>
+    <h4 class="modal-title" id="playerModalLabel">{{ item.metadata.result.title || item.name }}</h4>
 </div>
 <div class="modal-body">
     <div class="row">
         <div class="col-md-8">
             <h5>Metadata</h5>
             <ul class="list-unstyled">
-            <li><strong>Title:</strong> {{ item.metadata.result.title }}</li>
+            <li ng-show="item.metadata"><strong>Title:</strong> {{ item.metadata.result.title }}</li>
             <li><strong>Release name:</strong> {{ item.name }}</li>
-            <li><strong>Genre:</strong><ul class="list-unstyled" style="margin-bottom: 0;"><li ng-repeat="genre in item.metadata.result.genres">- {{ genre }}</li></ul></li>
-            <li><strong>Rating:</strong> {{ item.metadata.result.rating }} ({{ item.metadata.result.votes }})</li>
-            <li><strong>IMdb link:</strong> <a href="http://www.imdb.com/title/tt{{ item.metadata.id }}" target="_blank">{{ item.metadata.id }}</a></li>
-            <li><strong>Plot:</strong> {{ item.metadata.result.plot }}</li>
+            <li ng-show="item.metadata"><strong>Genre:</strong><ul class="list-unstyled" style="margin-bottom: 0;"><li ng-repeat="genre in item.metadata.result.genres">- {{ genre }}</li></ul></li>
+            <li ng-show="item.metadata"><strong>Rating:</strong> {{ item.metadata.result.rating }} ({{ item.metadata.result.votes }})</li>
+            <li ng-show="item.metadata"><strong>IMdb link:</strong> <a href="http://www.imdb.com/title/tt{{ item.metadata.id }}" target="_blank">{{ item.metadata.id }}</a></li>
+            <li ng-show="item.metadata"><strong>Plot:</strong> {{ item.metadata.result.plot }}</li>
             </ul>
         </div>
 
