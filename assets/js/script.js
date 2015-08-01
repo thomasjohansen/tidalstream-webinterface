@@ -295,7 +295,7 @@
     }
   });
 
-  tidalstreamApp.controller('ItemCtrl', function($scope, $modalInstance, tidalstreamService, item) {
+  tidalstreamApp.controller('ItemCtrl', function($scope, $modal, $modalInstance, tidalstreamService, item) {
     $scope.item = item;
 
     $scope.players = tidalstreamService.players;
@@ -307,7 +307,22 @@
 
       item.watched = Date.now() / 1000;
 
-      return tidalstreamService.doItemPlayback(item);
+      tidalstreamService.doItemPlayback(item).then(function () {
+        $modalInstance.close();
+
+        var modalInstance;
+        return modalInstance = $modal.open({
+          templateUrl: 'assets/partials/player.html',
+          controller: 'PlayerCtrl',
+          resolve: {
+            player: function() {
+              return player;
+            }
+          }
+        });
+      });
+
+
     };
   });
 
