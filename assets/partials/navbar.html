@@ -18,6 +18,18 @@
           <li ng-repeat="section in getSections()"><a ng-click="changePath(section.href)" href>{{ section.name }}</a></li>
         </ul>
       </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href>
+        Playback <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li ng-show="features.control" class="dropdown-header">Players</li>
+          <li ng-if="features.control && tsService.connectedToControl" ng-repeat="player in getPlayers()">
+            <a ng-click="openPlayer(player)" href>
+              {{ player.name }}</a>
+          </li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a><span ng-show="tsService.loadingData" class="glyphicon glyphicon-glass spinner"></span></a></li>
