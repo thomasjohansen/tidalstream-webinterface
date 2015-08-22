@@ -302,7 +302,12 @@
 
     $scope.handleItem = function(player, item) {
       tidalstreamService.playbackOutput.obj = player;
-      tidalstreamService.playbackOutput.type = 'player';
+      if (player == 'download') {
+        tidalstreamService.playbackOutput.type = 'download';
+      }
+      else {
+        tidalstreamService.playbackOutput.type = 'player';
+      }
       tidalstreamService.playbackOutput.status = 'online';
 
       item.watched = Date.now() / 1000;
