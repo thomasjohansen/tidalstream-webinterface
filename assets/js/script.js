@@ -57,6 +57,13 @@
       redirectTo: '/'
     });
   });
+  tidalstreamApp.config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {   
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|vlc):/);
+    }
+]);
 
   tidalstreamApp.controller('AlertCtrl', function($scope, $rootScope, tidalstreamService) {
     $scope.data = {
