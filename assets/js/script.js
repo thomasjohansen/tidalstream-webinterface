@@ -81,7 +81,6 @@
   });
 
   tidalstreamApp.controller('DownloadCtrl', function($scope, $interval, $modalInstance, tidalstreamService, item) {
-    console.log(item);
     item.vlc = item.href.replace('https', 'vlc');
     return $scope.item = item;
   });
